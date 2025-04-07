@@ -32,12 +32,13 @@ comment)
   swisign-django        # 프로젝트 최상위 폴더 (swisign-django는 임시로 정한 폴더명임)
   └───client            # 프론트엔드 폴더
     └───...               # 하위폴더들 (디테일은 프론트엔드 README.md 참고)
+    .env                  # 프론트용 env
   └───server            # 백엔드 폴더
     └───appChatbot        # 챗봇용 App (임시)
     └───appMain           # 메인용 App (임시)
     └───appTest           # Swagger 및 ORM CRUD 테스트 용 App
     └───config            # 테스트 용
-    .env                  # env
+    .env                  # 백용 env
     manage.py             # 서버 실행
   └───swisign-venv      # 가상 환경 폴더 (해당 뎁스로 가상 환경 생성)
     └───Include           # ..
