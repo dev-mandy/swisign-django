@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <style>
+            * { font-family: HYGothic-Medium; }
+        </style>
+
+    </head>
+
+    <body>
+        <!-- Content for Static Frame 'header_frame' -->
+        <div id="header_content">Lyrics-R-Us</div>
+
+        <!-- Content for Static Frame 'footer_frame' -->
+        <div id="footer_content">(c) - page <pdf:pagenumber>
+            of <pdf:pagecount>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>특약사항</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <ul>
+                            {% for item in items %}
+                                <li>
+                                    {{ item }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

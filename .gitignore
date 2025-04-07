@@ -1,0 +1,8 @@
+swisign-venv
+.idea
+.git
+server/.env
+client/.env
+client/.gitignore
+client/yarn.lock
+client/node_module

@@ -1,0 +1,92 @@
+[
+  {
+    "propertyType": "오피스텔",
+    "address": "서울특별시 종로구 대학로 86 한국방송통신대학교 나눔관 509호",
+    "priceDetails": [
+      {
+        "label": "매매",
+        "size": "23/15m²",
+        "highest": "105,000",
+        "lowest": "94,500",
+        "highestDate": "2024.09.01",
+        "lowestDate": "2024.07.01"
+      },
+      {
+        "label": "전세",
+        "size": "23/115m²",
+        "highest": "105,000",
+        "lowest": "94,500",
+        "highestDate": "2024.09.01",
+        "lowestDate": "2024.07.01"
+      },
+      {
+        "label": "월세",
+        "size": "23/15m²",
+        "highest": "105,000",
+        "lowest": "94,500",
+        "highestDate": "2024.09.01",
+        "lowestDate": "2024.07.01"
+      }
+    ]
+  },
+  {
+    "propertyType": "아파트",
+    "address": "서울특별시 강남구 테헤란로 123",
+    "priceDetails": [
+      {
+        "label": "매매",
+        "size": "40/25m²",
+        "highest": "200,000",
+        "lowest": "180,000",
+        "highestDate": "2024.10.01",
+        "lowestDate": "2024.08.01"
+      },
+      {
+        "label": "전세",
+        "size": "40/125m²",
+        "highest": "150,000",
+        "lowest": "135,000",
+        "highestDate": "2024.10.01",
+        "lowestDate": "2024.08.01"
+      },
+      {
+        "label": "월세",
+        "size": "40/25m²",
+        "highest": "80,000",
+        "lowest": "70,000",
+        "highestDate": "2024.10.01",
+        "lowestDate": "2024.08.01"
+      }
+    ]
+  },
+  {
+    "propertyType": "빌라",
+    "address": "서울특별시 마포구 서교동 456-1",
+    "priceDetails": [
+      {
+        "label": "매매",
+        "size": "30/20m²",
+        "highest": "120,000",
+        "lowest": "100,000",
+        "highestDate": "2024.09.15",
+        "lowestDate": "2024.07.15"
+      },
+      {
+        "label": "전세",
+        "size": "30/120m²",
+        "highest": "110,000",
+        "lowest": "90,000",
+        "highestDate": "2024.09.15",
+        "lowestDate": "2024.07.15"
+      },
+      {
+        "label": "월세",
+        "size": "30/20m²",
+        "highest": "55,000",
+        "lowest": "45,000",
+        "highestDate": "2024.09.15",
+        "lowestDate": "2024.07.15"
+      }
+    ]
+  }
+]

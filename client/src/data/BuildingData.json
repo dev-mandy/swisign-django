@@ -1,0 +1,24 @@
+[
+  {
+    "documentNumber": "MAMD-AHAK-CDAU-OQFG-UHYL",
+    "uniqueNumber": "1174010900-1-0050022",
+    "units": [
+      { 
+        "unit": 0, 
+        "households": 10, 
+        "families": 0 
+      }
+    ],
+    "address": "서울특별시 강동구 천호동",
+    "lotNumber": "50-22",
+    "roadName": "서울특별시 강동구 천중로43길 48(천호동)",
+    "buildingInfo": [
+      { "floor": "2", "unit": "201", "area": "45.1" },
+      { "floor": "2", "unit": "202", "area": "48.0" },
+      { "floor": "3", "unit": "301", "area": "50.5" },
+      { "floor": "3", "unit": "302", "area": "52.0" }
+    ],
+    "issueDate": "2024.10.17",
+    "issuingAuthority": "강동구청장"
+  }
+]

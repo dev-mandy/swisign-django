@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>DB 테스트</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+        }
+
+        h2:not(:first-child) {
+            margin-top: 40px;
+            margin-bottom: 10px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 20px;
+        }
+
+        label {
+            display: inline-block;
+            width: 60px;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 200px;
+            padding: 4px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 5px 12px;
+            margin-top: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 8px;
+        }
+
+        /* 스크롤 테이블 스타일 */
+        .scroll-table-container {
+            max-height: 200px;
+            overflow-y: scroll;
+            border: 1px solid #000;
+            margin-bottom: 30px;
+        }
+
+        .scroll-table-container thead th {
+            position: sticky;
+            top: 0;
+            background: #fff;
+            box-shadow: 0 2px 0 #000;
+            z-index: 1;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- 등록 리스트 스크롤 테이블 -->
+<div class="section">
+    <h2>등록 리스트</h2>
+    <div class="scroll-table-container">
+        <table id="testDataList">
+            <thead>
+            <tr>
+                <th>시퀀스</th>
+                <th>이름</th>
+                <th>나이</th>
+                <th>이메일</th>
+                <th>성별</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 등록 -->
+<div class="section">
+    <h2>등록</h2>
+    <form action="" name="saveForm" id="saveForm">
+        <div class="form-group">
+            <label for="saveName">이름:</label>
+            <input id="saveName" name="testName" type="text">
+        </div>
+        <div class="form-group">
+            <label for="saveAge">나이:</label>
+            <input id="saveAge" name="age" type="number">
+        </div>
+        <div class="form-group">
+            <label for="saveEmail">이메일:</label>
+            <input id="saveEmail" name="email" type="text">
+        </div>
+        <div class="form-group">
+            <label for="saveGender">성별:</label>
+            <select id="saveGender" name="gender">
+                <option value="M">남성</option>
+                <option value="F">여성</option>
+            </select>
+        </div>
+        <button type="button" onclick="submitSaveForm()">등록</button>
+    </form>
+</div>
+
+<!-- 수정 -->
+<div class="section">
+    <h2>수정</h2>
+    <form action="" name="updateForm" id="updateForm">
+        <input id="updateSeq" name="seq" type="hidden">
+        <div class="form-group">
+            <label for="updateName">이름:</label>
+            <input id="updateName" name="testName" type="text">
+        </div>
+        <div class="form-group">
+            <label for="updateAge">나이:</label>
+            <input id="updateAge" name="age" type="number">
+        </div>
+        <div class="form-group">
+            <label for="updateEmail">이메일:</label>
+            <input id="updateEmail" name="email" type="text">
+        </div>
+        <div class="form-group">
+            <label for="updateGender">성별:</label>
+            <select id="updateGender" name="gender">
+                <option value="M">남성</option>
+                <option value="F">여성</option>
+            </select>
+        </div>
+        <button type="button" onclick="submitUpdateForm()">수정</button>
+    </form>
+</div>
+
+<!-- 삭제 -->
+<div class="section">
+    <h2>삭제</h2>
+    <div class="scroll-table-container">
+        <table id="testDataDeleteList">
+            <thead>
+            <tr>
+                <th>시퀀스</th>
+                <th>이름</th>
+                <th>나이</th>
+                <th>이메일</th>
+                <th>성별</th>
+                <th>삭제</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>mandy</td>
+                <td>21</td>
+                <td>mandy@gmail.com</td>
+                <td>F</td>
+                <td>
+                    <label>
+                        <input type="checkbox" name="deleteRows" value="1">
+                    </label>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <button type="button" onclick="submitDeleteForm()">삭제</button>
+</div>
+</body>
+</html>
+
+<script>
+    let items = [];
+
+    //등록 리스트 행 클릭 시 수정 폼에 값 채우기
+    document.querySelector('#testDataList > tbody').addEventListener('click', function(e) {
+        const seq = e.target.parentNode.dataset.seq;
+        const item = items.find(item => Number(item.pk) === Number(seq))
+        const fields = item.fields;
+        document.querySelector('#updateSeq').value = item.pk;
+        document.querySelector('#updateName').value = fields.testname;
+        document.querySelector('#updateAge').value = fields.age;
+        document.querySelector('#updateEmail').value = fields.email;
+        document.querySelector('#updateGender').value = fields.gender;
+    })
+
+    //태그 생성
+    function makeTag(data, isDelete = false) {
+        const fields = data.fields;
+        const pk = data.pk;
+        let checkbox = '';
+        if(isDelete){
+            checkbox = `
+                <td>
+                    <label>
+                        <input type="checkbox" name="deleteRows" value="${pk}">
+                    </label>
+                </td>
+            `
+        }
+        return `
+            <tr data-seq='${pk}'>
+                <td>${pk}</td>
+                <td>${fields.testname}</td>
+                <td>${fields.age}</td>
+                <td>${fields.email}</td>
+                <td>${fields.gender === 'F' ? '여성' : '남성'}</td>
+                ${checkbox}
+            </tr>
+        `;
+    }
+
+    //최초 로드 후 실행
+    window.addEventListener('DOMContentLoaded', function() {
+         getList();
+    })
+
+    //리스트 가져오기
+    function getList() {
+        fetch('http://localhost:8000/test/testdata/list')
+        .then((res) => res.json())
+        .then((data) => {
+            const list = data.data.list;
+            if(data.status === 200 && Array.isArray(list)){
+                items = list;
+                let html = '';
+                let deleteHtml = '';
+                list.forEach(item => {
+                    html += makeTag(item, false)
+                    deleteHtml += makeTag(item, true)
+                })
+                document.querySelector('#testDataList > tbody').innerHTML = html;
+                document.querySelector('#testDataDeleteList > tbody').innerHTML = deleteHtml;
+            }
+        })
+        .catch((error) => console.error(error));
+    }
+
+    //등록
+    function submitSaveForm() {
+        const form = document.querySelector('#saveForm');
+        const formData = new FormData();
+        formData.append('testname', form.saveName.value)
+        formData.append('age', form.saveAge.value)
+        formData.append('email', form.saveEmail.value)
+        formData.append('gender', form.saveGender.value)
+        fetch('http://localhost:8000/test/testdata/save', {
+            method: 'POST',
+            body: formData,
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data)
+            if(data.status === 200) {
+                document.querySelector('#saveForm').reset()
+                alert('등록 완료');
+                getList();
+            }else{
+                alert('등록 실패');
+                return false;
+            }
+        })
+        .catch((error) => console.error(error));
+    }
+
+    //수정
+    function submitUpdateForm() {
+        const form = document.querySelector('#updateForm');
+        const seq = form.updateSeq.value;
+        if(seq === '' || seq === undefined || seq === null){
+            alert('등록 리스트에서 행을 클릭하세요.')
+            return false;
+        }
+        const formData = new FormData();
+        formData.append('seq', seq)
+        formData.append('testname', form.updateName.value)
+        formData.append('age', form.updateAge.value)
+        formData.append('email', form.updateEmail.value)
+        formData.append('gender', form.updateGender.value)
+        fetch('http://localhost:8000/test/testdata/update', {
+            method: 'POST',
+            body: formData,
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            if(data.status === 200) {
+                const updateRows = data.data.updateRows;
+                if(updateRows > 0){
+                    alert(`${updateRows}건 수정 완료`);
+                    getList();
+                }
+            }
+        })
+        .catch((error) => console.error(error));
+    }
+
+    //삭제
+    function submitDeleteForm() {
+        const deleteRows = document.querySelectorAll('[name=deleteRows]:checked')
+        if(deleteRows.length === 0){
+            alert('항목을 선택해주세요.')
+            return false;
+        }
+
+        const formData = new FormData();
+        deleteRows.forEach(row => {
+            formData.append('seq', row.value)
+        })
+        fetch('http://localhost:8000/test/testdata/delete', {
+            method: 'POST',
+            body: formData,
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            if(data.status === 200) {
+                const deleteRows = data.data.deleteRows;
+                if(deleteRows > 0){
+                    alert(`${deleteRows}건 삭제 완료`);
+                    getList();
+                }
+            }
+        })
+        .catch((error) => console.error(error));
+    }
+</script>

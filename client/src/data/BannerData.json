@@ -1,0 +1,17 @@
+[
+  {
+    "title": "네이버",
+    "imageUrl": "https://cdn.pixabay.com/photo/2016/06/18/12/27/contract-1464917_1280.jpg",
+    "linkUrl": "https://m.naver.com/"
+  },
+  {
+    "title": "다음",
+    "imageUrl": "https://cdn.pixabay.com/photo/2015/10/20/18/57/furniture-998265_1280.jpg",
+    "linkUrl": "https://m.daum.net/"
+  },
+  {
+    "title": "구글",
+    "imageUrl": "https://cdn.pixabay.com/photo/2024/03/07/15/57/houses-8618837_1280.jpg",
+    "linkUrl": "https://www.google.com/"
+  }
+]
