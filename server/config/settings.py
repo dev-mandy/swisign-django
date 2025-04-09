@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'rest_framework', #swagger
     'appMain.apps.AppmainConfig',
     'appChatbot.apps.AppchatbotConfig',
-    'appTest.apps.ApptestConfig'
+    'appTest.apps.ApptestConfig',
+    'appModels.apps.AppmodelsConfig'
 ]
 
 MIDDLEWARE = [

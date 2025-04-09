@@ -1,15 +1,14 @@
-from django.shortcuts import render
+import json
 from django.core import serializers
-from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
+from django.shortcuts import render
+from django.views.decorators.http import require_http_methods
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import FormParser, MultiPartParser
-
-from .api_responses import api_responses
 from .api_params import *
-from .models import TestData
-import json
-from drf_yasg.utils       import swagger_auto_schema
+from .api_responses import api_responses
+from appModels.models.TestData import TestData
 
 
 # 테스트 화면
