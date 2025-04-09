@@ -10,6 +10,9 @@ comment)
   * swagger ui 및 sql crud 예시는 appTest 하위 파일들과 config/settings.py, config/urls.py를 참고해주세요.
   * swagger url: http://localhost:8000/swagger
   * test url: http://localhost:8000/test
+* 2025-04-09
+  * django는 변수명을 카멜 케이스가 아닌 스네이크 케이스를 사용하는 것으로 확인되어 db네이밍 규칙을 변경해야 할 것 같음.
+  * 스네이크 케이스 적용한 테이블 테스트 겸 새로 생성함 (property_listings)
 
 ---
 
