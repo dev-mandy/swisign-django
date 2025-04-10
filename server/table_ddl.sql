@@ -1,4 +1,4 @@
-create or replace table api_key
+create or replace table swisign.api_key
 (
     AK_seq      bigint auto_increment comment 'APIKey 시퀀스'
         primary key,
@@ -18,7 +18,7 @@ ex) kakao',
 )
     comment 'API Key Data' collate = utf8mb3_unicode_ci;
 
-create or replace table api_log
+create or replace table swisign.api_log
 (
     AL_seq          bigint auto_increment
         primary key,
@@ -34,7 +34,7 @@ create or replace table api_log
 )
     comment 'API Log' collate = utf8mb3_unicode_ci;
 
-create or replace table auth_group
+create or replace table swisign.auth_group
 (
     id   int auto_increment
         primary key,
@@ -44,7 +44,7 @@ create or replace table auth_group
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table auth_user
+create or replace table swisign.auth_user
 (
     id           int auto_increment
         primary key,
@@ -63,7 +63,7 @@ create or replace table auth_user
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table auth_user_groups
+create or replace table swisign.auth_user_groups
 (
     id       bigint auto_increment
         primary key,
@@ -72,13 +72,13 @@ create or replace table auth_user_groups
     constraint auth_user_groups_user_id_group_id_94350c0c_uniq
         unique (user_id, group_id),
     constraint auth_user_groups_group_id_97559544_fk_auth_group_id
-        foreign key (group_id) references auth_group (id),
+        foreign key (group_id) references swisign.auth_group (id),
     constraint auth_user_groups_user_id_6a12ed8b_fk_auth_user_id
-        foreign key (user_id) references auth_user (id)
+        foreign key (user_id) references swisign.auth_user (id)
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table building_register_set
+create or replace table swisign.building_register_set
 (
     BRS_seq                     bigint auto_increment comment 'Building Register Set 시퀀스'
         primary key,
@@ -121,7 +121,7 @@ create or replace table building_register_set
 )
     comment '집합건축물대장 표제부 API' collate = utf8mb3_unicode_ci;
 
-create or replace table common_code
+create or replace table swisign.common_code
 (
     CC_seq         bigint auto_increment comment 'CommonCode 시퀀스'
         primary key,
@@ -142,7 +142,7 @@ create or replace table common_code
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table company_data
+create or replace table swisign.company_data
 (
     CD_seq            bigint auto_increment comment 'CompanyData 시퀀스'
         primary key,
@@ -164,7 +164,7 @@ create or replace table company_data
 )
     comment '회사정보 (footer) 하드코딩할 경우 테이블 삭제' collate = utf8mb3_unicode_ci;
 
-create or replace table customer
+create or replace table swisign.customer
 (
     C_seq                 bigint auto_increment comment 'Customer 시퀀스 넘버'
         primary key,
@@ -225,7 +225,7 @@ W:여성',
 )
     comment '고객 테이블' collate = utf8mb3_unicode_ci;
 
-create or replace table django_content_type
+create or replace table swisign.django_content_type
 (
     id        int auto_increment
         primary key,
@@ -236,7 +236,7 @@ create or replace table django_content_type
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table auth_permission
+create or replace table swisign.auth_permission
 (
     id              int auto_increment
         primary key,
@@ -246,11 +246,11 @@ create or replace table auth_permission
     constraint auth_permission_content_type_id_codename_01ab375a_uniq
         unique (content_type_id, codename),
     constraint auth_permission_content_type_id_2f476e4b_fk_django_co
-        foreign key (content_type_id) references django_content_type (id)
+        foreign key (content_type_id) references swisign.django_content_type (id)
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table auth_group_permissions
+create or replace table swisign.auth_group_permissions
 (
     id            bigint auto_increment
         primary key,
@@ -259,13 +259,13 @@ create or replace table auth_group_permissions
     constraint auth_group_permissions_group_id_permission_id_0cd325b0_uniq
         unique (group_id, permission_id),
     constraint auth_group_permissio_permission_id_84c5c92e_fk_auth_perm
-        foreign key (permission_id) references auth_permission (id),
+        foreign key (permission_id) references swisign.auth_permission (id),
     constraint auth_group_permissions_group_id_b120cbf9_fk_auth_group_id
-        foreign key (group_id) references auth_group (id)
+        foreign key (group_id) references swisign.auth_group (id)
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table auth_user_user_permissions
+create or replace table swisign.auth_user_user_permissions
 (
     id            bigint auto_increment
         primary key,
@@ -274,13 +274,13 @@ create or replace table auth_user_user_permissions
     constraint auth_user_user_permissions_user_id_permission_id_14a6b632_uniq
         unique (user_id, permission_id),
     constraint auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm
-        foreign key (permission_id) references auth_permission (id),
+        foreign key (permission_id) references swisign.auth_permission (id),
     constraint auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id
-        foreign key (user_id) references auth_user (id)
+        foreign key (user_id) references swisign.auth_user (id)
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table django_admin_log
+create or replace table swisign.django_admin_log
 (
     id              int auto_increment
         primary key,
@@ -292,15 +292,15 @@ create or replace table django_admin_log
     content_type_id int               null,
     user_id         int               not null,
     constraint django_admin_log_content_type_id_c4bce8eb_fk_django_co
-        foreign key (content_type_id) references django_content_type (id),
+        foreign key (content_type_id) references swisign.django_content_type (id),
     constraint django_admin_log_user_id_c564eba6_fk_auth_user_id
-        foreign key (user_id) references auth_user (id),
+        foreign key (user_id) references swisign.auth_user (id),
     constraint action_flag
         check (`action_flag` >= 0)
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table django_migrations
+create or replace table swisign.django_migrations
 (
     id      bigint auto_increment
         primary key,
@@ -310,7 +310,7 @@ create or replace table django_migrations
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table django_session
+create or replace table swisign.django_session
 (
     session_key  varchar(40) not null
         primary key,
@@ -320,9 +320,9 @@ create or replace table django_session
     collate = utf8mb3_unicode_ci;
 
 create or replace index django_session_expire_date_a5c62663
-    on django_session (expire_date);
+    on swisign.django_session (expire_date);
 
-create or replace table general_buildings
+create or replace table swisign.general_buildings
 (
     resDocNo bigint auto_increment comment 'General Buildings ResDocNo'
         primary key,
@@ -331,7 +331,7 @@ create or replace table general_buildings
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table med_office_name
+create or replace table swisign.med_office_name
 (
     MON_seq             bigint auto_increment comment 'Med Office Name 시퀀스'
         primary key,
@@ -359,7 +359,7 @@ create or replace table med_office_name
 )
     comment '전국공인중개사 사무소 표준 데이터 API' collate = utf8mb3_unicode_ci;
 
-create or replace table pg_cancel_data
+create or replace table swisign.pg_cancel_data
 (
     PCD_seq          bigint auto_increment comment 'PG Cancel Data 시퀀스'
         primary key,
@@ -383,7 +383,7 @@ create or replace table pg_cancel_data
 )
     comment 'PG Cancel Data 테이블' collate = utf8mb3_unicode_ci;
 
-create or replace table pg_data
+create or replace table swisign.pg_data
 (
     PD_seq              bigint auto_increment comment 'PG Data 시퀀스'
         primary key,
@@ -461,7 +461,7 @@ create or replace table pg_data
 )
     comment 'PG Data' collate = utf8mb3_unicode_ci;
 
-create or replace table proof_issue_tax_cert
+create or replace table swisign.proof_issue_tax_cert
 (
     PITC_seq                   bigint auto_increment comment 'Proof Issue Tax Cert 시퀀스'
         primary key,
@@ -497,7 +497,7 @@ create or replace table proof_issue_tax_cert
 )
     comment '납세증명서 API' collate = utf8mb3_unicode_ci;
 
-create or replace table property_listings
+create or replace table swisign.property_listings
 (
     pl_seq                bigint auto_increment comment 'Property Listings 시퀀스'
         primary key,
@@ -566,7 +566,7 @@ cancel: 취소',
 )
     comment '매물 리스트' collate = utf8mb3_unicode_ci;
 
-create or replace table real_estate_register
+create or replace table swisign.real_estate_register
 (
     RER_seq                    bigint auto_increment comment 'Real Estate Register 시퀀스'
         primary key,
@@ -600,7 +600,7 @@ create or replace table real_estate_register
 )
     comment '부동산등기부등본 열람/발급 API' collate = utf8mb3_unicode_ci;
 
-create or replace table stan_region_cd
+create or replace table swisign.stan_region_cd
 (
     SRC_seq             bigint auto_increment
         primary key,
@@ -622,7 +622,7 @@ create or replace table stan_region_cd
 )
     comment '법정동코드' collate = utf8mb3_unicode_ci;
 
-create or replace table test_data
+create or replace table swisign.test_data
 (
     seq      bigint auto_increment
         primary key,
