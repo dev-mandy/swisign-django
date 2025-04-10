@@ -10,6 +10,44 @@ from .api_params import *
 from .api_responses import api_responses
 from appModels.models.TestData import TestData
 
+import json
+from easycodefpy import Codef, ServiceType
+from dotenv import load_dotenv
+import os
+load_dotenv()
+# 코드에프 인스턴스 생성
+codef = Codef()
+codef.public_key = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjjYTugtEcRbCVE/y1X5Z5kVz7AWd/2X4/aimn59ftqiIHIAZ3I7paGF12f0IYtNWb9nWZipERibZ64fmobjQ7xQLYi+6BnABrJZmWZgrLceUFu86Z0FaDf+v/r39LD6qVIdwGRGTcPf68iIODZPwznzX3udZknDWmYrUsZusmpd5bsQud/ScDJj5cjjB5CYZBwK4wadK9FoHN1qgtA1P+8hWK3XR43pzhqhM/ub0g/DDyxl+4ZXZBhehT1lsP77jTEZyW98tvmWDN5YOFbLoiF13ibThaHNIR0P8dLr/OOtgQVwwk6XAYvgJqilKfXk48C4p3ZMoSTkNNv4CpjwrTQIDAQAB'
+#codef 테스트
+@swagger_auto_schema(
+    method='get',
+    tags=['Try Codef API'],
+    operation_description='Codef API를 테스트합니다. 한 달 최대 100건 테스트 가능',
+    operation_summary='Try Codef API',
+    responses=api_responses
+)
+@api_view(['GET'])
+def codef_test(request):
+    codef.set_demo_client_info(os.getenv('codef_client_id'), os.getenv('codef_client_secret'))
+    parameter = {
+        "organization": "0001",
+        "loginType": "1",
+        "userId": "yhl2780",
+        "userPassword": "Sc8O0Zell2XvnTElY70IT/JecOaYscqwJP6byRVsORZBrXMysqis2yZrqY1JWakXyZU3kDH8nd9hdNtNNMiQ1myt/Qs5Emb++jAI49WleLwkF6zrQf8N8nIGd9GR/lUY50H/mwnSGiWeK7nX20ttB3gAJK1hpeCEQJ42xpxB1IGJbiPzl7NdzxK873CkXT1hozZNIBjFAJBfv3HhioR9PwDOpOWOF2lE9+8C9eJOH369R9DzBfJxeBbl7n/hjHqawReWu7JIKI7zIhq7p8YAmeA9jc3G5KDlsRrPPU9wKRizp9EBCn4h0AoGHoWX+n3xvwVMGzZkX5tRz24Pdm2+NQ==",
+        "address": "인천광역시 계양구 하느재로20번길 5-28",
+        "dong": "1",
+        "ho": "202",
+        "type": "0",
+        "zipCode": "21040"
+    }
+    # 코드에프 정보 조회 요청
+    # - 서비스타입(0:정식, 1:데모, 2:샌드박스)
+    # 개인 보유계좌 조회 (https://developer.codef.io/products/bank/common/p/account)
+    product_url = "/v1/kr/public/mw/multiowned-buildings/possession-ledger"
+    res = codef.request_product(product_url, ServiceType.DEMO, parameter)
+    print(res)
+
+    return make_response(200, True, 200, {"codef_response": res})
 
 # 테스트 화면
 def index(request):

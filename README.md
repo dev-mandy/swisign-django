@@ -18,6 +18,7 @@ comment)
   * codef api list https://codef.io/service/package/PKG0019
 * 2025-04-10
   * 해당 커밋 이후 작업마다 브랜치 새로 따서 작업할 예정
+  * https://www.notion.so/team/1d118fe4-9097-817b-915b-00424bbee0d3/join
 
 ---
 

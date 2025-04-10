@@ -542,7 +542,7 @@ const Register = () => {
     /**
      * 계약서 종류 - 매매
      * Order No : 2
-     * @param type  renter : 임차인 / landlord : 임대인 / agent : 공인중개사
+     * @param type  lessee : 임차인 / lessor : 임대인 / agent : 공인중개사
      * Before Event
      * * role1()
      * * role2()
@@ -552,7 +552,7 @@ const Register = () => {
             setContractValues({...contractValuesRef.current, contractType: '매매'});
             messages.push(messageSetting('매매', 'user', []));
             messages.push(messageSetting('매매를 선택하셨습니다.', 'bot', []));
-            if (type === 'renter') {
+            if (type === 'lessee') {
                 //임차인일 때
                 messages.push(messageSetting('계약하실 주소를 검색해 주세요.', 'bot', []));
                 openPostcode()
@@ -566,7 +566,7 @@ const Register = () => {
     /**
      * 계약서 종류 - 전세
      * Order No : 2
-     * @param type  renter : 임차인 / landlord : 임대인 / agent : 공인중개사
+     * @param type  lessee : 임차인 / lessor : 임대인 / agent : 공인중개사
      * Before Event
      * * role1()
      * * role2()
@@ -576,7 +576,7 @@ const Register = () => {
         setContractValues({...contractValuesRef.current, contractType: '전세'});
         messages.push(messageSetting('전세', 'user', []));
         messages.push(messageSetting('전세를 선택하셨습니다.', 'bot', []));
-        if (type === 'renter') {
+        if (type === 'lessee') {
             //임차인일 때
             messages.push(messageSetting('계약하실 주소를 검색해 주세요.', 'bot', []));
             openPostcode()
@@ -590,7 +590,7 @@ const Register = () => {
     /**
      * 계약서 종류 - 월세
      * Order No : 2
-     * @param type  renter : 임차인 / landlord : 임대인 / agent : 공인중개사
+     * @param type  lessee : 임차인 / lessor : 임대인 / agent : 공인중개사
      * Before Event
      * * role1()
      * * role2()
@@ -600,7 +600,7 @@ const Register = () => {
         setContractValues({...contractValuesRef.current, contractType: '월세'});
         messages.push(messageSetting('월세', 'user', []));
         messages.push(messageSetting('월세를 선택하셨습니다.', 'bot', []));
-        if (type === 'renter') {
+        if (type === 'lessee') {
             //임차인일 때
             messages.push(messageSetting('계약하실 주소를 검색해 주세요.', 'bot', []));
             openPostcode()
@@ -652,17 +652,17 @@ const Register = () => {
         const buttons = [
             {
                 callback: () => {
-                    bargain('renter')
+                    bargain('lessee')
                 }, color: 'white', text: '매매'
             },
             {
                 callback: () => {
-                    charter('renter')
+                    charter('lessee')
                 }, color: 'white', text: '전세'
             },
             {
                 callback: () => {
-                    monthly('renter')
+                    monthly('lessee')
                 }, color: 'white', text: '월세'
             }
         ];
@@ -683,17 +683,17 @@ const Register = () => {
         const buttons = [
             {
                 callback: () => {
-                    bargain('landlord')
+                    bargain('lessor')
                 }, color: 'white', text: '매매'
             },
             {
                 callback: () => {
-                    charter('landlord')
+                    charter('lessor')
                 }, color: 'white', text: '전세'
             },
             {
                 callback: () => {
-                    monthly('landlord')
+                    monthly('lessor')
                 }, color: 'white', text: '월세'
             }
         ];
