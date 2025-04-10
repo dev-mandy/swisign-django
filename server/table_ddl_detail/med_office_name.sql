@@ -14,7 +14,7 @@ create table med_office_name
     MON_ddcJoinYn       varchar(1)                            null comment 'Med Office Name 공제가입유무 [Y,N]',
     MON_rprsvNm         varchar(10)                           null comment 'Med Office Name 대표자명',
     MON_latitude        varchar(100)                          null comment 'Med Office Name 위도',
-    MON_longitude       varchar(100)                          not null comment '경도',
+    MON_longitude       varchar(100)                          not null comment 'Med Office Name 경도',
     MON_medSpmbrCnt     varchar(100)                          not null comment 'Med Office Name 중개보조원수',
     MON_ogdpLreaCnt     varchar(100)                          null comment 'Med Office Name 소속공인중개사수',
     MON_hmpgAddr        varchar(100)                          null comment 'Med Office Name 홈페이지주소',

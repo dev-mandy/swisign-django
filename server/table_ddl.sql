@@ -1,4 +1,4 @@
-create or replace table swisign.api_key
+create or replace table api_key
 (
     AK_seq      bigint auto_increment comment 'APIKey 시퀀스'
         primary key,
@@ -18,7 +18,7 @@ ex) kakao',
 )
     comment 'API Key Data' collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.api_log
+create or replace table api_log
 (
     AL_seq          bigint auto_increment
         primary key,
@@ -34,7 +34,7 @@ create or replace table swisign.api_log
 )
     comment 'API Log' collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.auth_group
+create or replace table auth_group
 (
     id   int auto_increment
         primary key,
@@ -44,7 +44,7 @@ create or replace table swisign.auth_group
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.auth_user
+create or replace table auth_user
 (
     id           int auto_increment
         primary key,
@@ -63,7 +63,7 @@ create or replace table swisign.auth_user
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.auth_user_groups
+create or replace table auth_user_groups
 (
     id       bigint auto_increment
         primary key,
@@ -72,13 +72,13 @@ create or replace table swisign.auth_user_groups
     constraint auth_user_groups_user_id_group_id_94350c0c_uniq
         unique (user_id, group_id),
     constraint auth_user_groups_group_id_97559544_fk_auth_group_id
-        foreign key (group_id) references swisign.auth_group (id),
+        foreign key (group_id) references auth_group (id),
     constraint auth_user_groups_user_id_6a12ed8b_fk_auth_user_id
-        foreign key (user_id) references swisign.auth_user (id)
+        foreign key (user_id) references auth_user (id)
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.building_register_set
+create or replace table building_register_set
 (
     BRS_seq                     bigint auto_increment comment 'Building Register Set 시퀀스'
         primary key,
@@ -121,7 +121,7 @@ create or replace table swisign.building_register_set
 )
     comment '집합건축물대장 표제부 API' collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.common_code
+create or replace table common_code
 (
     CC_seq         bigint auto_increment comment 'CommonCode 시퀀스'
         primary key,
@@ -142,7 +142,7 @@ create or replace table swisign.common_code
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.company_data
+create or replace table company_data
 (
     CD_seq            bigint auto_increment comment 'CompanyData 시퀀스'
         primary key,
@@ -164,7 +164,7 @@ create or replace table swisign.company_data
 )
     comment '회사정보 (footer) 하드코딩할 경우 테이블 삭제' collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.customer
+create or replace table customer
 (
     c_seq                   bigint auto_increment comment 'Customer 시퀀스 넘버'
         primary key,
@@ -182,7 +182,7 @@ create or replace table swisign.customer
 4: 구글
 5: 애플',
     c_road_address          varchar(500)                           null comment 'Customer 도로명 주소',
-    c_bunji_address         varchar(500)                           null comment 'Customer 구주소',
+    c_jibun_address         varchar(500)                           null comment 'Customer 지번주소',
     c_detail_address        varchar(500)                           null comment 'Customer 상세주소',
     c_post_code             varchar(10)                            null comment 'Customer 우편번호',
     c_email                 varchar(100)                           null comment 'Customer 이메일 (암호화)',
@@ -225,7 +225,7 @@ W:여성',
 )
     comment '고객 테이블' collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.django_content_type
+create or replace table django_content_type
 (
     id        int auto_increment
         primary key,
@@ -236,7 +236,7 @@ create or replace table swisign.django_content_type
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.auth_permission
+create or replace table auth_permission
 (
     id              int auto_increment
         primary key,
@@ -246,11 +246,11 @@ create or replace table swisign.auth_permission
     constraint auth_permission_content_type_id_codename_01ab375a_uniq
         unique (content_type_id, codename),
     constraint auth_permission_content_type_id_2f476e4b_fk_django_co
-        foreign key (content_type_id) references swisign.django_content_type (id)
+        foreign key (content_type_id) references django_content_type (id)
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.auth_group_permissions
+create or replace table auth_group_permissions
 (
     id            bigint auto_increment
         primary key,
@@ -259,13 +259,13 @@ create or replace table swisign.auth_group_permissions
     constraint auth_group_permissions_group_id_permission_id_0cd325b0_uniq
         unique (group_id, permission_id),
     constraint auth_group_permissio_permission_id_84c5c92e_fk_auth_perm
-        foreign key (permission_id) references swisign.auth_permission (id),
+        foreign key (permission_id) references auth_permission (id),
     constraint auth_group_permissions_group_id_b120cbf9_fk_auth_group_id
-        foreign key (group_id) references swisign.auth_group (id)
+        foreign key (group_id) references auth_group (id)
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.auth_user_user_permissions
+create or replace table auth_user_user_permissions
 (
     id            bigint auto_increment
         primary key,
@@ -274,13 +274,13 @@ create or replace table swisign.auth_user_user_permissions
     constraint auth_user_user_permissions_user_id_permission_id_14a6b632_uniq
         unique (user_id, permission_id),
     constraint auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm
-        foreign key (permission_id) references swisign.auth_permission (id),
+        foreign key (permission_id) references auth_permission (id),
     constraint auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id
-        foreign key (user_id) references swisign.auth_user (id)
+        foreign key (user_id) references auth_user (id)
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.django_admin_log
+create or replace table django_admin_log
 (
     id              int auto_increment
         primary key,
@@ -292,15 +292,15 @@ create or replace table swisign.django_admin_log
     content_type_id int               null,
     user_id         int               not null,
     constraint django_admin_log_content_type_id_c4bce8eb_fk_django_co
-        foreign key (content_type_id) references swisign.django_content_type (id),
+        foreign key (content_type_id) references django_content_type (id),
     constraint django_admin_log_user_id_c564eba6_fk_auth_user_id
-        foreign key (user_id) references swisign.auth_user (id),
+        foreign key (user_id) references auth_user (id),
     constraint action_flag
         check (`action_flag` >= 0)
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.django_migrations
+create or replace table django_migrations
 (
     id      bigint auto_increment
         primary key,
@@ -310,7 +310,7 @@ create or replace table swisign.django_migrations
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.django_session
+create or replace table django_session
 (
     session_key  varchar(40) not null
         primary key,
@@ -320,9 +320,9 @@ create or replace table swisign.django_session
     collate = utf8mb3_unicode_ci;
 
 create or replace index django_session_expire_date_a5c62663
-    on swisign.django_session (expire_date);
+    on django_session (expire_date);
 
-create or replace table swisign.general_buildings
+create or replace table general_buildings
 (
     resDocNo bigint auto_increment comment 'General Buildings ResDocNo'
         primary key,
@@ -331,7 +331,7 @@ create or replace table swisign.general_buildings
 )
     collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.med_office_name
+create or replace table med_office_name
 (
     MON_seq             bigint auto_increment comment 'Med Office Name 시퀀스'
         primary key,
@@ -345,7 +345,7 @@ create or replace table swisign.med_office_name
     MON_ddcJoinYn       varchar(1)                            null comment 'Med Office Name 공제가입유무 [Y,N]',
     MON_rprsvNm         varchar(10)                           null comment 'Med Office Name 대표자명',
     MON_latitude        varchar(100)                          null comment 'Med Office Name 위도',
-    MON_longitude       varchar(100)                          not null comment '경도',
+    MON_longitude       varchar(100)                          not null comment 'Med Office Name 경도',
     MON_medSpmbrCnt     varchar(100)                          not null comment 'Med Office Name 중개보조원수',
     MON_ogdpLreaCnt     varchar(100)                          null comment 'Med Office Name 소속공인중개사수',
     MON_hmpgAddr        varchar(100)                          null comment 'Med Office Name 홈페이지주소',
@@ -359,7 +359,7 @@ create or replace table swisign.med_office_name
 )
     comment '전국공인중개사 사무소 표준 데이터 API' collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.pg_cancel_data
+create or replace table pg_cancel_data
 (
     PCD_seq          bigint auto_increment comment 'PG Cancel Data 시퀀스'
         primary key,
@@ -383,7 +383,7 @@ create or replace table swisign.pg_cancel_data
 )
     comment 'PG Cancel Data 테이블' collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.pg_data
+create or replace table pg_data
 (
     PD_seq              bigint auto_increment comment 'PG Data 시퀀스'
         primary key,
@@ -461,7 +461,7 @@ create or replace table swisign.pg_data
 )
     comment 'PG Data' collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.proof_issue_tax_cert
+create or replace table proof_issue_tax_cert
 (
     PITC_seq                   bigint auto_increment comment 'Proof Issue Tax Cert 시퀀스'
         primary key,
@@ -497,76 +497,7 @@ create or replace table swisign.proof_issue_tax_cert
 )
     comment '납세증명서 API' collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.property_listings
-(
-    pl_seq                bigint auto_increment comment 'Property Listings 시퀀스'
-        primary key,
-    pl_status             varchar(10) collate utf8mb4_unicode_ci default 'request'           not null comment 'Property Listings 매물 진행 상태
-request: 요청
-post: 등록
-ing: 진행
-done: 완료
-cancel: 취소',
-    pl_document_num       varchar(25) collate utf8mb4_unicode_ci                             not null comment 'Property Listings 문서확인번호',
-    pl_unique_num         varchar(25) collate utf8mb4_unicode_ci                             not null comment 'Property Listings 고유번호',
-    pl_address            varchar(50) collate utf8mb4_unicode_ci                             not null comment 'Property Listings 주소',
-    pl_jibun              varchar(10) collate utf8mb4_unicode_ci                             not null comment 'Property Listings 지번',
-    pl_road_address       varchar(50) collate utf8mb4_unicode_ci                             not null comment 'Property Listings 도로명주소',
-    pl_building_type      varchar(10) collate utf8mb4_unicode_ci                             not null comment 'Property Listings 건물 유형 *choices*',
-    pl_total_floor        tinyint                                default 0                   not null comment 'Property Listings 총 층수',
-    pl_total_ho           smallint                               default 0                   not null comment 'Property Listings 총 호수',
-    pl_total_household    smallint                               default 0                   not null comment 'Property Listings 총 세대수',
-    pl_floor              tinyint                                default 0                   not null comment 'Property Listings 해당 매물 층',
-    pl_ho                 varchar(10) collate utf8mb4_unicode_ci                             not null comment 'Property Listings 해당 매물 호',
-    pl_area               decimal(6, 2)                                                      not null comment 'Property Listings 면적 (총 6자리 중 2자리 소수점)',
-    pl_common_area        decimal(6, 2)                                                      not null comment 'Property Listings 공용 면적 (총 6자리 중 2자리 소수점)',
-    pl_issue_date         datetime                                                           not null comment 'Property Listings 문서 발급일',
-    pl_issuer             varchar(20) collate utf8mb4_unicode_ci                             not null comment 'Property Listings 발급기관',
-    pl_contract_type      varchar(10) collate utf8mb4_unicode_ci                             not null comment 'Property Listings 전세/월세 *choices*',
-    pl_deposit            int                                    default 0                   not null comment 'Property Listings 보증금',
-    pl_monthly_rent       int                                    default 0                   not null comment 'Property Listings 월세',
-    pl_maintenance_fee_yn tinyint(1)                             default 1                   not null comment 'Property Listings 관리비 여부
-0: 불가능
-1: 가능',
-    pl_maintenance_fee    longtext collate utf8mb4_bin           default 0                   not null comment 'Property Listings 관리비 (항목별로 입력해야 할 것 같아 json)',
-    pl_parking_yn         tinyint(1)                             default 1                   not null comment 'Property Listings 주차가능여부
-0: 불가능
-1: 가능',
-    pl_parking_fee        int                                    default 0                   not null comment 'Property Listings 주차비',
-    pl_loan_yn            tinyint(1)                             default 1                   not null comment 'Property Listings 대출가능여부
-0: 불가능
-1: 가능',
-    pl_loan               int                                    default 0                   not null comment 'Property Listings 대출가능상품
-예시
-0: 가능상품없음
-1: 카카오전세대출
-2: hug
-4: ...',
-    pl_move_in_now_yn     tinyint(1)                             default 0                   not null comment 'Property Listings 즉시 입주 가능 여부
-0: 불가능 (날짜선택)
-1: 가능',
-    pl_move_in_date       datetime                               default current_timestamp() not null comment 'Property Listings 입주 가능 날짜 (즉시 가능은 Now())',
-    pl_etc                varchar(500) collate utf8mb4_unicode_ci                            null comment 'Property Listings 비고',
-    c_seq_landlord        bigint                                                             not null comment 'Property Listings 임대인 회원 번호',
-    c_seq_agent           bigint                                                             not null comment 'Property Listings 중개인 회원 번호',
-    pl_created            datetime                               default current_timestamp() not null comment 'Property Listings 등록일',
-    pl_updated            datetime                               default current_timestamp() not null comment 'Property Listings 수정일',
-    pl_views              int                                    default 0                   not null comment 'Property Listings 조회수',
-    pl_view_yn            tinyint(1)                             default 1                   not null comment 'Property Listings 노출 여부
-0: 숨김
-1: 노출',
-    pl_deleted_yn         tinyint(1)                             default 0                   not null comment 'Property Listings 삭제 여부
-0: 삭제안됨
-1: 삭제됨',
-    pl_deleted            datetime                               default current_timestamp() not null comment 'Property Listings 삭제일',
-    constraint property_listings_pl_seq_uindex
-        unique (pl_seq),
-    constraint pl_maintenance_fee
-        check (json_valid(`pl_maintenance_fee`))
-)
-    comment '매물 리스트' collate = utf8mb3_unicode_ci;
-
-create or replace table swisign.real_estate_register
+create or replace table real_estate_register
 (
     RER_seq                    bigint auto_increment comment 'Real Estate Register 시퀀스'
         primary key,
@@ -600,7 +531,174 @@ create or replace table swisign.real_estate_register
 )
     comment '부동산등기부등본 열람/발급 API' collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.stan_region_cd
+create or replace table realty_contract
+(
+    rc_seq                         bigint auto_increment comment 'Realty Contract 시퀀스'
+        primary key,
+    c_seq                          bigint                                    not null comment 'Realty Contract 계약서 최초 작성 회원 시퀀스',
+    rc_contract_type               varchar(10)                               not null comment 'Realty Contract 계약 유형
+sale: 매매
+jeonse: 전세
+monthly: 월세',
+    rc_customer_type               varchar(10)                               not null comment 'Realty Contract 계약서 최초 작성 회원 유형',
+    rc_road_address                varchar(500)                              not null comment 'Realty Contract 계약목적물 도로명 주소',
+    rc_jibun_address               varchar(500)                              not null comment 'Realty Contract 계약목적물 지번주소',
+    rc_detail_address              varchar(500)                              not null comment 'Realty Contract 상세주소',
+    rc_postcode                    varchar(10)                               not null comment 'Realty Contract 우편번호',
+    rc_bulding_area                decimal(7, 2) default 0.00                not null comment 'Realty Contract 건물 면적',
+    rc_dong                        varchar(10)   default '0'                 null comment 'Realty Contract 계약목적물 동수',
+    rc_floor                       tinyint       default 0                   null comment 'Realty Contract 계약목적물 층수',
+    rc_ho                          varchar(10)   default '0'                 null comment 'Realty Contract 계약목적물 호수',
+    rc_area                        decimal(6, 2) default 0.00                not null comment 'Realty Contract 전용면적 (임차할부분)',
+    rc_land_type                   varchar(5)                                not null comment 'Realty Contract 토지 지목(지목코드 파일 생성예정)',
+    rc_land_area                   decimal(7, 2) default 0.00                not null comment 'Realty Contract 토지 면적',
+    rc_building_structure          varchar(5)                                not null comment 'Realty Contract 건물 구조 (건물구조코드 파일 생성예정)',
+    rc_building_type               varchar(10)                               not null comment 'Realty Contract 건물 유형 (건물유형코드 파일 생성예정)',
+    rc_contract_is_new             tinyint(1)    default 1                   not null comment 'Realty Contract 신규 계약 여부
+0: 재계약
+1: 신규 계약',
+    rc_before_document_seq         bigint                                    null comment 'Realty Contract 재계약인 경우 이전 계약서 시퀀스',
+    c_seq_lessor                   bigint                                    null comment 'Realty Contract 임대인 회원 시퀀스',
+    rc_lessor_road_address         varchar(500)                              not null comment 'Realty Contract 임대인 도로명주소*암호화',
+    rc_lessor_jibun_address        varchar(500)                              not null comment 'Realty Contract 임대인 지번주소*암호화',
+    rc_lessor_detail_address       varchar(500)                              not null comment 'Realty Contract 임대인 상세주소*암호화',
+    rc_lessor_postcode             varchar(10)                               not null comment 'Realty Contract 임대인 우편번호',
+    rc_lessor_name                 varchar(100)                              not null comment 'Realty Contract 임대인 성명*암호화',
+    rc_lessor_rrn_front            char(6)                                   not null comment 'Realty Contract 임대인 주민번호 앞자리',
+    rc_lessor_rrn_back             varchar(100)                              not null comment 'Realty Contract 주민번호 뒷자리 *암호화',
+    rc_lessor_phone                varchar(100)                              not null comment 'Realty Contract 임대인 핸드폰번호 *암호화',
+    rc_lessor_agent_name           varchar(100)                              not null comment 'Realty Contract 임대 대리인 성명*암호화',
+    rc_lessor_agent_rrn_front      char(6)                                   not null comment 'Realty Contract 임대 대리인 주민번호 앞자리',
+    rc_lessor_agent_rrn_back       varchar(100)                              not null comment 'Realty Contract 임대 대리인 주민번호 뒷자리*암호화',
+    rc_lessor_agent_road_address   varchar(500)                              not null comment 'Realty Contract 임대 대리인 도로명주소*암호화',
+    rc_lessor_agent_jibun_address  varchar(500)                              not null comment 'Realty Contract 임대 대리인 지번주소*암호화',
+    rc_lessor_agent_detail_address varchar(500)                              not null comment 'Realty Contract 임대 대리인 상세주소*암호화',
+    rc_lessor_agent_postcode       varchar(10)                               null comment 'Realty Contract 임대 대리인 우편번호',
+    c_seq_lessee                   bigint                                    null comment 'Realty Contract 임차인 회원 시퀀스',
+    rc_lessee_name                 varchar(100)                              not null comment 'Realty Contract 임차인 성명*암호화',
+    rc_lessee_rrn_front            char(6)                                   not null comment 'Realty Contract 임차인 주민번호 앞자리',
+    rc_lessee_rrn_back             varchar(100)                              not null comment 'Realty Contract 임차인 주민번호 뒷자리*암호화',
+    rc_lessee_phone                varchar(100)                              not null comment 'Realty Contract 임차인 핸드폰번호*암호화',
+    rc_lessee_road_address         varchar(500)                              not null comment 'Realty Contract 임차인 도로명주소*암호화',
+    rc_lessee_jibun_address        varchar(500)                              not null comment 'Realty Contract 임차인 지번주소*암호화',
+    rc_lessee_detail_address       varchar(500)                              not null comment 'Realty Contract 임차인 상세주소*암호화',
+    rc_lessee_postcode             varchar(10)                               not null comment 'Realty Contract 임차인 우편번호',
+    rc_lessee_agent_name           varchar(100)                              not null comment 'Realty Contract 임차 대리인 성명*암호화',
+    rc_lessee_agent_rrn_front      char(6)                                   not null comment 'Realty Contract 임차 대리인 주민번호 앞자리',
+    rc_lessee_agent_rrn_back       varchar(100)                              not null comment 'Realty Contract 임차 대리인 주민번호 뒷자리*암호화',
+    rc_lessee_agent_road_address   varchar(500)                              not null comment 'Realty Contract 임차 대리인 도로명 주소*암호화',
+    rc_lessee_agent_jibun_address  varchar(500)                              not null comment 'Realty Contract 임차 대리인 지번주소*암호화',
+    rc_lessee_agent_detail_address varchar(500)                              not null comment 'Realty Contract 임차 대리인 상세주소*암호화',
+    rc_lessee_agent_postcode       varchar(10)                               not null comment 'Realty Contract 임차 대리인 우편번호',
+    c_seq_agent                    bigint                                    null comment 'Realty Contract 중개인 회원 시퀀스',
+    rc_agency_road_address         varchar(100)                              not null comment 'Realty Contract 공인중개소 도로명 주소',
+    rc_agency_jibun_address        varchar(100)                              null comment 'Realty Contract 공인중개소 지번 주소(없을수있음)',
+    rc_agency_detail_address       varchar(100)                              null comment 'Realty Contract 공인중개소 상세 주소(없을수있음)',
+    rc_agency_postcode             varchar(10)                               null comment 'Realty Contract 공인중개소 우편번호(없을수있음)',
+    rc_agency_name                 varchar(50)                               not null comment 'Realty Contract 공인중개소 사무소명칭',
+    rc_agency_owner                varchar(50)                               not null comment 'Realty Contract 공인중개소 대표 명',
+    rc_agency_registration_number  varchar(50)                               not null comment 'Realty Contract 공인중개소 등록번호',
+    rc_agency_phone                varchar(20)                               not null comment 'Realty Contract 공인중개소 전화번호',
+    rc_agency_agent_name           varchar(50)                               not null comment 'Realty Contract 공인중개소 소속공인중개사 성명',
+    rc_contract_start_date         datetime                                  not null comment 'Realty Contract 계약 시작 일시',
+    rc_contract_end_date           datetime                                  not null comment 'Realty Contract 계약 종료 일시',
+    rc_deposit                     int           default 0                   not null comment 'Realty Contract 보증금',
+    rc_rent                        int           default 0                   not null comment 'Realty Contract 월세',
+    rc_rent_pay_day                tinyint       default 1                   not null comment 'Realty Contract 월세 입금일, 날짜 (1~31)',
+    rc_bank                        varchar(3)                                not null comment 'Realty Contract 월세 입금 계좌 - 은행 (은행코드 파일 생성예정)',
+    rc_bank_account_number         varchar(50)                               not null comment 'Realty Contract 월세 입금 계좌 번호',
+    rc_maintenance_is_fixed        tinyint(1)                                not null comment 'Realty Contract 관리비 고정 여부
+0: 가변
+1: 고정',
+    rc_maintenance_fee             varchar(500)  default '0'                 not null comment 'Realty Contract 관리비, 고정일 경우 Number치환 필요',
+    rc_down_payment                int           default 0                   not null comment 'Realty Contract 계약금',
+    rc_middle_payment              int           default 0                   not null comment 'Realty Contract 중도금',
+    rc_middle_payment_date         datetime                                  null comment 'Realty Contract 중도금지불일',
+    rc_balance                     int           default 0                   not null comment 'Realty Contract 잔금',
+    rc_balance_date                datetime                                  not null comment 'Realty Contract 잔금지불일',
+    rc_parking_yn                  tinyint(1)    default 0                   not null comment 'Realty Contract 주차가능여부
+0: 불가능
+1: 가능',
+    rc_parking_fee                 int           default 0                   not null comment 'Realty Contract 주차비',
+    rc_special_terms_ids           varchar(500)                              not null comment 'Realty Contract 특약사항 (특약사항 테이블시퀀스, 구분자는 콤마)',
+    rc_contract_issue_date         datetime      default current_timestamp() not null comment 'Realty Contract 계약서 교부일 (작성완료 시점)',
+    rc_agency_owner_signature      varchar(500)                              not null comment 'Realty Contract 공인중개소 대표 서명(이미지 공통 테이블에서)',
+    rc_lessor_signed_date          datetime                                  null comment 'Realty Contract 임대인 서명완료 일시',
+    rc_lessor_signature            varchar(500)                              null comment 'Realty Contract 임대인 서명(이미지 공통 테이블에서)',
+    rc_lessee_signed_date          datetime                                  null comment 'Realty Contract 임차인 서명완료 일시',
+    rc_lessee_signature            varchar(500)                              null comment 'Realty Contract 임차인 서명(이미지 공통 테이블에서)',
+    rc_agent_signed_date           datetime                                  null comment 'Realty Contract 중개인 서명완료 일시',
+    rc_agent_signature             varchar(500)                              null comment 'Realty Contract 중개인 서명(이미지 공통 테이블에서)',
+    rc_updated                     datetime      default current_timestamp() not null comment 'Realty Contract 수정일자',
+    rc_created                     datetime      default current_timestamp() not null comment 'Realty Contract 생성일자',
+    rc_contract_effective_date     datetime                                  null comment 'Realty Contract 계약 성립일(임대인/임차인/중개인 모두 서명 완료된 날짜)',
+    constraint realty_contract_rc_seq_uindex
+        unique (rc_seq)
+)
+    comment '부동산 전자계약서';
+
+create or replace table realty_listings
+(
+    rl_seq                  bigint auto_increment comment 'Realty Listings 시퀀스'
+        primary key,
+    rl_status               varchar(10) collate utf8mb4_unicode_ci default 'request'           not null comment 'Realty Listings 매물 진행 상태
+request: 요청
+post: 등록
+ing: 진행
+done: 완료
+cancel: 취소',
+    rl_document_num         varchar(25) collate utf8mb4_unicode_ci                             not null comment 'Realty Listings 문서확인번호',
+    rl_unique_num           varchar(25) collate utf8mb4_unicode_ci                             not null comment 'Realty Listings 고유번호',
+    rl_address              varchar(50) collate utf8mb4_unicode_ci                             not null comment 'Realty Listings 주소',
+    rl_jibun                varchar(10) collate utf8mb4_unicode_ci                             not null comment 'Realty Listings 지번',
+    rl_road_address         varchar(50) collate utf8mb4_unicode_ci                             not null comment 'Realty Listings 도로명주소',
+    rl_building_type        varchar(10) collate utf8mb4_unicode_ci                             not null comment 'Realty Listings 건물 유형 *choices*',
+    rl_total_floor          tinyint                                default 0                   not null comment 'Realty Listings 총 층수',
+    rl_total_household      smallint                               default 0                   not null comment 'Realty Listings 총 세대수',
+    rl_total_ho             smallint                               default 0                   not null comment 'Realty Listings 총 호수',
+    rl_floor                tinyint                                default 0                   not null comment 'Realty Listings 해당 매물 층',
+    rl_ho                   varchar(10) collate utf8mb4_unicode_ci                             not null comment 'Realty Listings 해당 매물 호',
+    rl_area                 decimal(6, 2)                                                      not null comment 'Realty Listings 면적 (총 6자리 중 2자리 소수점)',
+    rl_common_area          decimal(6, 2)                                                      not null comment 'Realty Listings 공용 면적 (총 6자리 중 2자리 소수점)',
+    rl_issue_date           datetime                                                           not null comment 'Realty Listings 문서 발급일',
+    rl_issuer               varchar(20) collate utf8mb4_unicode_ci                             not null comment 'Realty Listings 발급기관',
+    rl_contract_type        varchar(10) collate utf8mb4_unicode_ci                             not null comment 'Realty Listings 전세/월세 *choices*',
+    rl_deposit              int                                    default 0                   not null comment 'Realty Listings 보증금',
+    rl_rent                 int                                    default 0                   not null comment 'Realty Listings 월세',
+    rl_maintenance_is_fixed tinyint(1)                             default 1                   not null comment 'Realty Listings 관리비 고정 여부
+0: 가변
+1: 고정',
+    rl_maintenance_fee      varchar(500) collate utf8mb4_bin       default '0'                 not null comment 'Realty Listings 관리비 고정 시 Number치환필요',
+    rl_parking_yn           tinyint(1)                             default 1                   not null comment 'Realty Listings 주차가능여부
+0: 불가능
+1: 가능',
+    rl_parking_fee          int                                    default 0                   not null comment 'Realty Listings 주차비',
+    rl_loan_yn              tinyint(1)                             default 1                   not null comment 'Realty Listings 대출가능여부
+0: 불가능
+1: 가능',
+    rl_move_in_now_yn       tinyint(1)                             default 0                   not null comment 'Realty Listings 즉시 입주 가능 여부
+0: 불가능 (날짜선택)
+1: 가능',
+    rl_move_in_date         datetime                               default current_timestamp() not null comment 'Realty Listings 입주 가능 날짜 (즉시 가능은 Now())',
+    rl_etc                  varchar(500) collate utf8mb4_unicode_ci                            null comment 'Realty Listings 비고',
+    c_seq_landlord          bigint                                                             not null comment 'Property Listings 임대인 회원 번호',
+    c_seq_agent             bigint                                                             not null comment 'Property Listings 중개인 회원 번호',
+    rl_created              datetime                               default current_timestamp() not null comment 'Realty Listings 등록일',
+    rl_updated              datetime                               default current_timestamp() not null comment 'Realty Listings 수정일',
+    rl_views                int                                    default 0                   not null comment 'Realty Listings 조회수',
+    rl_view_yn              tinyint(1)                             default 1                   not null comment 'Realty Listings 노출 여부
+0: 숨김
+1: 노출',
+    rl_deleted_yn           tinyint(1)                             default 0                   not null comment 'Realty Listings 삭제 여부
+0: 삭제안됨
+1: 삭제됨',
+    rl_deleted              datetime                               default current_timestamp() not null comment 'Realty Listings 삭제일',
+    constraint property_listings_pl_seq_uindex
+        unique (rl_seq)
+)
+    comment '매물 리스트' collate = utf8mb3_unicode_ci;
+
+create or replace table stan_region_cd
 (
     SRC_seq             bigint auto_increment
         primary key,
@@ -622,7 +720,7 @@ create or replace table swisign.stan_region_cd
 )
     comment '법정동코드' collate = utf8mb3_unicode_ci;
 
-create or replace table swisign.test_data
+create or replace table test_data
 (
     seq      bigint auto_increment
         primary key,

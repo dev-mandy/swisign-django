@@ -17,7 +17,7 @@ create table customer
 4: 구글
 5: 애플',
     c_road_address          varchar(500)                           null comment 'Customer 도로명 주소',
-    c_bunji_address         varchar(500)                           null comment 'Customer 구주소',
+    c_jibun_address         varchar(500)                           null comment 'Customer 지번주소',
     c_detail_address        varchar(500)                           null comment 'Customer 상세주소',
     c_post_code             varchar(10)                            null comment 'Customer 우편번호',
     c_email                 varchar(100)                           null comment 'Customer 이메일 (암호화)',
