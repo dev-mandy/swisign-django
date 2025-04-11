@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'appMain.apps.AppmainConfig',
     'appChatbot.apps.AppchatbotConfig',
     'appTest.apps.ApptestConfig',
-    'appModels.apps.AppmodelsConfig'
+    'appCommon.apps.AppcommonConfig'
 ]
 
 MIDDLEWARE = [

@@ -531,7 +531,7 @@ create or replace table real_estate_register
 )
     comment '부동산등기부등본 열람/발급 API' collate = utf8mb3_unicode_ci;
 
-create or replace table realty_contract
+create table realty_contract
 (
     rc_seq                         bigint auto_increment comment 'Realty Contract 시퀀스'
         primary key,
@@ -548,10 +548,10 @@ monthly: 월세',
     rc_bulding_area                decimal(7, 2) default 0.00                not null comment 'Realty Contract 건물 면적',
     rc_dong                        varchar(10)   default '0'                 null comment 'Realty Contract 계약목적물 동수',
     rc_floor                       tinyint       default 0                   null comment 'Realty Contract 계약목적물 층수',
-    rc_ho                          varchar(10)   default '0'                 null comment 'Realty Contract 계약목적물 호수',
+    rc_land_area                   decimal(7, 2) default 0.00                not null comment 'Realty Contract 토지 면적',
     rc_area                        decimal(6, 2) default 0.00                not null comment 'Realty Contract 전용면적 (임차할부분)',
     rc_land_type                   varchar(5)                                not null comment 'Realty Contract 토지 지목(지목코드 파일 생성예정)',
-    rc_land_area                   decimal(7, 2) default 0.00                not null comment 'Realty Contract 토지 면적',
+    rc_building_purpose            varchar(10)                               not null comment 'Realty Contract 건물 주용도 (건물용도코드 파일 생성예정)',
     rc_building_structure          varchar(5)                                not null comment 'Realty Contract 건물 구조 (건물구조코드 파일 생성예정)',
     rc_building_type               varchar(10)                               not null comment 'Realty Contract 건물 유형 (건물유형코드 파일 생성예정)',
     rc_contract_is_new             tinyint(1)    default 1                   not null comment 'Realty Contract 신규 계약 여부
@@ -569,7 +569,7 @@ monthly: 월세',
     rc_lessor_phone                varchar(100)                              not null comment 'Realty Contract 임대인 핸드폰번호 *암호화',
     rc_lessor_agent_name           varchar(100)                              not null comment 'Realty Contract 임대 대리인 성명*암호화',
     rc_lessor_agent_rrn_front      char(6)                                   not null comment 'Realty Contract 임대 대리인 주민번호 앞자리',
-    rc_lessor_agent_rrn_back       varchar(100)                              not null comment 'Realty Contract 임대 대리인 주민번호 뒷자리*암호화',
+    rc_ho                          varchar(10)   default '0'                 null comment 'Realty Contract 계약목적물 호수',
     rc_lessor_agent_road_address   varchar(500)                              not null comment 'Realty Contract 임대 대리인 도로명주소*암호화',
     rc_lessor_agent_jibun_address  varchar(500)                              not null comment 'Realty Contract 임대 대리인 지번주소*암호화',
     rc_lessor_agent_detail_address varchar(500)                              not null comment 'Realty Contract 임대 대리인 상세주소*암호화',
@@ -595,7 +595,7 @@ monthly: 월세',
     rc_agency_jibun_address        varchar(100)                              null comment 'Realty Contract 공인중개소 지번 주소(없을수있음)',
     rc_agency_detail_address       varchar(100)                              null comment 'Realty Contract 공인중개소 상세 주소(없을수있음)',
     rc_agency_postcode             varchar(10)                               null comment 'Realty Contract 공인중개소 우편번호(없을수있음)',
-    rc_agency_name                 varchar(50)                               not null comment 'Realty Contract 공인중개소 사무소명칭',
+    rc_lessor_agent_rrn_back       varchar(100)                              not null comment 'Realty Contract 임대 대리인 주민번호 뒷자리*암호화',
     rc_agency_owner                varchar(50)                               not null comment 'Realty Contract 공인중개소 대표 명',
     rc_agency_registration_number  varchar(50)                               not null comment 'Realty Contract 공인중개소 등록번호',
     rc_agency_phone                varchar(20)                               not null comment 'Realty Contract 공인중개소 전화번호',
@@ -614,6 +614,7 @@ monthly: 월세',
     rc_down_payment                int           default 0                   not null comment 'Realty Contract 계약금',
     rc_middle_payment              int           default 0                   not null comment 'Realty Contract 중도금',
     rc_middle_payment_date         datetime                                  null comment 'Realty Contract 중도금지불일',
+    rc_agency_name                 varchar(50)                               not null comment 'Realty Contract 공인중개소 사무소명칭',
     rc_balance                     int           default 0                   not null comment 'Realty Contract 잔금',
     rc_balance_date                datetime                                  not null comment 'Realty Contract 잔금지불일',
     rc_parking_yn                  tinyint(1)    default 0                   not null comment 'Realty Contract 주차가능여부
@@ -636,6 +637,8 @@ monthly: 월세',
         unique (rc_seq)
 )
     comment '부동산 전자계약서';
+
+
 
 create or replace table realty_listings
 (

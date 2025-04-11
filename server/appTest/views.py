@@ -8,7 +8,7 @@ from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import FormParser, MultiPartParser
 from .api_params import *
 from .api_responses import api_responses
-from appModels.models.TestData import TestData
+from appCommon.models.TestData import TestData
 
 import json
 from easycodefpy import Codef, ServiceType
@@ -277,3 +277,4 @@ def delete_test_data(request):
 # makeResponse
 def make_response(status, result, result_code, data):
     return JsonResponse({'result':result, 'resultCode':result_code, 'data':data, 'status':status})
+
